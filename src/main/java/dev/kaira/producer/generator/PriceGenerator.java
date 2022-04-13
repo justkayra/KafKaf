@@ -21,7 +21,7 @@ public class PriceGenerator {
     private Random random = new Random();
 
     private List<Price> prices = List.of(
-            new Price(1, "HItachi", 13),
+            new Price(1, "Hitachi", 13),
             new Price(2, "Sanyo", 5),
             new Price(3, "Technics", 11),
             new Price(4, "NEC", 16),
@@ -37,12 +37,12 @@ public class PriceGenerator {
                 .onOverflow().drop()
                 .map(tick -> {
                     Price station = prices.get(random.nextInt(prices.size()));
-                    double temperature = BigDecimal.valueOf(random.nextGaussian() * 15 + station.cost)
+                    double value = BigDecimal.valueOf(random.nextGaussian() * 15 + station.cost)
                             .setScale(1, RoundingMode.HALF_UP)
                             .doubleValue();
 
-                    LOG.infov("station: {0}, temperature: {1}", station.name, temperature);
-                    return Record.of(station.id, Instant.now() + ";" + temperature);
+                    LOG.infov("brand: {0}, price: {1}", station.name, value);
+                    return Record.of(station.id, Instant.now() + ";" + value);
                 });
     }
 
